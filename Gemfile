@@ -9,6 +9,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rack-cors"
 gem "rails", "~> 7.0.8"
+gem "rubocop-rails", require: false
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
