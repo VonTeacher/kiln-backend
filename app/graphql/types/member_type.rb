@@ -2,7 +2,7 @@
 
 module Types
   class MemberType < Types::BaseObject
-    description "A Kiln Collective member"
+    description 'A Kiln Collective member'
 
     field :id, ID, null: false
     field :first_name, String
