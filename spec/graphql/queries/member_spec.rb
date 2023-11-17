@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Queries
   RSpec.describe Member, type: :request do
-    describe "member query" do
+    describe "Member query" do
       let!(:member) { create(:member) }
       let(:query) {
         <<~GQL
@@ -32,7 +32,7 @@ module Queries
     end
   end
 
-  describe "members query" do
+  describe "Members query" do
     let!(:members) { create_list(:member, 2) }
     let(:query) {
       <<~GQL
