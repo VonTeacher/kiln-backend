@@ -21,11 +21,16 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :members, [MemberType], null: false, description: "Fetches all members"
+    def members
+      Member.all.order("first_name ASC")
+    end
+
+    field :member, MemberType, null: true, description: "Fetches a member by first_name" do
+      argument :first_name, String, required: true, description: "First name of the member"
+    end
+    def member(first_name:)
+      Member.find_by(first_name: first_name)
     end
   end
 end
