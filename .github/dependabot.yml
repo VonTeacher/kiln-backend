@@ -9,10 +9,15 @@ updates:
     open-pull-requests-limit: 10
     directory: "/"
     groups:
-      bundler:
-        update_types:
-          - "major"
-          - "minor"
+      production-dependencies:
+        dependency-type: "production"
+      development-dependencies:
+        dependency-type: "development"
+        exclude-patterns:
+        - "rubocop*"
+      rubocop:
+        patterns:
+        - "rubocop*"
     schedule:
       interval: "monthly"
       day: "monday"
