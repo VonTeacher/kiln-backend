@@ -19,7 +19,7 @@ module Types
       argument :id, ID, required: true
     end
     def delete_member(id:)
-      member = Member.find(id)
+      member = Member.find_by(id: id)
       return false unless member
 
       member.destroy

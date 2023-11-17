@@ -29,6 +29,42 @@ module Mutations
             "firstName" => "Test"
           }
         )
+        expect(Member.count).to be 1
+      end
+    end
+
+    describe "Member delete mutation" do
+      let!(:result) { KilnBackendSchema.execute(mutation).as_json }
+
+      context "when member exists" do
+        let(:member) { create(:member) }
+        let(:mutation) {
+          <<~GQL
+            mutation {
+              deleteMember(id: "#{member.id}")
+            }
+          GQL
+        }
+
+        it "returns true" do
+          data = result["data"]["deleteMember"]
+          expect(data).to be true
+          expect(Member.count).to be 0
+        end
+      end
+
+      context "when member does not exist" do
+        let(:mutation) {
+          <<~GQL
+            mutation {
+              deleteMember(id: "999")
+            }
+          GQL
+        }
+
+        it "returns false" do
+          expect(result["data"]["deleteMember"]).to be false
+        end
       end
     end
   end
