@@ -1,6 +1,9 @@
 name: RSpec Tests
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -14,9 +17,15 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_DB: kiln_backend_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-intervale 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-intervale 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout Repository
@@ -32,8 +41,16 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Run Database Migrations
-        run: bundle exec rails db:migrate RAILS_ENV=test
+      - name: Database Creation & Migrations
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost/kiln_backend_test
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
 
-      - name: "Run RSpec Tests"
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost/kiln_backend_test
         run: bundle exec rspec
