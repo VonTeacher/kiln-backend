@@ -3,12 +3,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.1"
 
-gem "rails", "~> 7.0.8"
+gem "bootsnap", require: false
+gem "graphql"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem "bootsnap", require: false
 gem "rack-cors"
+gem "rails", "~> 7.0.8"
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
