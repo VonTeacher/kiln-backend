@@ -10,7 +10,7 @@ gem 'graphql'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 6.4'
 gem 'rack-cors'
-gem 'rails', '~> 7.1.2'
+gem 'rails', '~> 7.1.3'
 gem 'rubocop-rails', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
